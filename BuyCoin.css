@@ -198,12 +198,13 @@ color:#b4bfc1;
     box-sizing: border-box;
     border-radius: 4px;
     background: #FAFBFC;
+    color: gray;
     /* #C8CCD0; */
     border: 1px solid #ddd;
-    background-image: url('images/star.png');
-    background-size: 20px 20px;
-    background-position: 95% center;
-    background-repeat: no-repeat;
+    /* background-image: url('images/star.png'); */
+    /* background-size: 20px 20px; */
+    /* background-position: 95% center; */
+    /* background-repeat: no-repeat; */
     margin-top:15px; 
     padding:7px;
 }
@@ -357,7 +358,7 @@ color:#b4bfc1;
     font-size:14px;
     text-decoration: none;
     line-height: 30px;
-    color: black;
+    color: #333;
 }
 
 a.tab-item:hover{
@@ -367,6 +368,7 @@ a.tab-item:hover{
 .tab-item.selected{
     font-weight: bold;
     border-bottom:3px solid #f9826c;
+    color:#333;
 }
 
 .repoimg{
@@ -374,6 +376,12 @@ a.tab-item:hover{
     height: 20px;
     vertical-align: text-bottom;
     margin-right: 4px;
+    fill: gray;
+}
+
+.tab-item.selected .repoimg{
+    
+    fill: #333;
 }
 
 .repoimg2{
@@ -513,7 +521,13 @@ a.text-gray:hover{
 
 .octicon{
     display: inline-block;
-    fill: black;
+    fill: gray;
+    vertical-align: text-bottom;
+}
+
+.octicon-header{
+    display: inline-block;
+    fill: white;
     vertical-align: text-bottom;
 }
 
@@ -531,4 +545,17 @@ a.text-gray:hover{
 .firstProf{
     font-size: 12px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.dropdown-caret{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+    content: "";
+    border-top-style: solid;
+    border-top-width: 4px;
+    border-right: 4px solid transparent;
+    border-bottom: 0 solid transparent;
+    border-left: 4px solid transparent;
 }
