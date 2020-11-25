@@ -161,7 +161,6 @@ async function getRepository(){
   })
   .then(res => res.json())
   .then(res =>{
-     console.log(res);
      let image = res.data.viewer.avatarUrl;
      let fullName = res.data.viewer.name;
      let username = res.data.viewer.login;
