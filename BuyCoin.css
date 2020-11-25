@@ -83,6 +83,14 @@ color:#b4bfc1;
 .notification{
     display: inline;
 }
+
+.notification:hover{
+    cursor: pointer !important;
+    /* background-color: red !important; */
+}
+.hoverMe:hover{z-index:5;cursor: pointer;
+     /* background-color: #0366d6 !important; */
+    }
 .align-center-image{}
 
 .small-screen{display: none !important; }
@@ -138,6 +146,8 @@ color:#b4bfc1;
     background-color:white;
 }
 
+.header .nav2hidden{display: none;}
+.header .nav2visible{display: block;}
 .search{
     width:250px;
     box-sizing: border-box;
@@ -222,6 +232,21 @@ color:#b4bfc1;
 .nav{
     position: absolute;
     margin-top:10px;
+}
+
+.nav2visible{
+    position: absolute;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: #777;
+    margin-right:9px;
+    margin-top:44px;
+    z-index: 100;
+}
+
+.header .nav2visible a{
+    color:#64676B;
+    padding: 4px 8px 4px 16px;
 }
 
 .iconItems {
@@ -408,6 +433,36 @@ a.tab-item:hover{
     color:#777;
 }
 
+.divider{
+    /* margin: 8px 0; */
+    border-top:1px solid #E1E4E8;
+    display: block;
+    height: 0;
+}
+
+.bordergrey{
+    border-top:1px solid #E1E4E8;
+    border-bottom: 1px solid #E1E4E8;;
+    padding: 8px 0 !important;
+    display: block !important;
+    width: 100%;
+}
+
+.bordergreybottom{
+    border-bottom: 1px solid #E1E4E8;
+    padding: 8px 0 !important;
+    margin-left: -24px;
+    /* display: block; */
+    width: 100% !important;
+}
+
+.header .nav2visible .username {
+    font-size:12px;
+    color:#5D6064;
+    font-weight: bold;
+    line-height: 13px;;
+}
+
 .edit-profile{
     background-color: #F3F4F6;
     border:1px solid #bbb;
@@ -418,6 +473,22 @@ a.tab-item:hover{
 
 .edit-profile:hover{
     background-color: #c0c0c0;
+}
+
+.octicon{
+    display: inline-block;
+    fill: black;
+    vertical-align: text-bottom;
+}
+
+.statusBtn{
+    border: 1px solid #E1E4E8; background-color: white; padding:8px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.statusBtn:hover{
+    color: #0366d6;
 }
 /* .header a.active{
     border-bottom-style: 1px solid #F9826C ;
