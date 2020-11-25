@@ -2,7 +2,7 @@ let month = '';
 const url = 'https://api.github.com/graphql';
 const headers = {
   "Content-Type": "application/json",
-  "Authorization": "Bearer 302528a45ce3ccd5f524da8c49d49d339eb9b256",
+  "Authorization": "Bearer 8d7af106438c366263d125209c33e353f3389b8a",
 }
 
 function getMonth(monthValue){

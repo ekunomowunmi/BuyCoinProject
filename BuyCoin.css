@@ -19,6 +19,12 @@
     width: 100%;
   }
 
+  .column4{
+      width:33.33%;
+      padding-top: 15px;
+      float: left;
+  }
+
   @media only screen and (max-width: 599px) {
       .d-none {
           display: none;
@@ -56,6 +62,9 @@
     .col-12 {width: 100%;}
   }
 
+  .mobileStatus{
+      display: none;
+  }
 .header{
     background-color: #24292E;
     overflow:hidden;
@@ -86,10 +95,8 @@ color:#b4bfc1;
 
 .notification:hover{
     cursor: pointer !important;
-    /* background-color: red !important; */
 }
 .hoverMe:hover{z-index:5;cursor: pointer;
-     /* background-color: #0366d6 !important; */
     }
 .align-center-image{}
 
@@ -117,6 +124,12 @@ color:#b4bfc1;
     .small-screen{
         display: block !important;
     }
+    .mobileStatus{
+        display: block;
+    }
+    .edit-profile{
+        width:135% !important;
+    }
 
   }
   
@@ -138,6 +151,13 @@ color:#b4bfc1;
       float: none;
       display: block;
       text-align: left;
+    }
+    .picture{
+        margin-top:0px !important;
+    }
+    .avatar-user{
+        width:100px !important;
+        height: 100px;
     }
   }
 
@@ -237,8 +257,9 @@ color:#b4bfc1;
 .nav2visible{
     position: absolute;
     background-color: white;
+    border:1px solid #ccc;
     border-radius: 4px;
-    box-shadow: #777;
+    box-shadow: 0 0 0 1px #777;
     margin-right:9px;
     margin-top:44px;
     z-index: 100;
@@ -316,15 +337,19 @@ color:#b4bfc1;
 .tab-header{
     display: block;
     position: -webkit-sticky;
-    position: sticky;
+    position: sticky !important;
     margin:auto;
     background-color: #fafbfc;
     border-bottom: 1px solid #ddd;
     margin-top:10px;
     padding:10px 12px;
-    /* text-align: center; */
+    top:0;
     z-index: 3;
 
+}
+
+.tab-header-scroll{
+    padding:4px 4px !important;
 }
 
 .tab-item{
@@ -375,7 +400,15 @@ a.tab-item:hover{
 }
 
 .text-gray{
-    color:gray;
+    color:gray !important;
+}
+
+a.text-gray{
+    text-decoration: none;
+}
+
+a.text-gray:hover{
+    color: #0366d6 !important;
 }
 
 .mt-2{
@@ -386,7 +419,7 @@ a.tab-item:hover{
 }
 
 .font-12{
-    font-size:12px;
+    font-size:12px !important;
 }
 
 .border-bottom{
@@ -402,6 +435,8 @@ a.tab-item:hover{
 
 .avatar-user{
     border-radius: 50% !important;
+    width:260px;
+     height:260px;
 }
 
 .picture{
@@ -451,8 +486,8 @@ a.tab-item:hover{
 .bordergreybottom{
     border-bottom: 1px solid #E1E4E8;
     padding: 8px 0 !important;
-    margin-left: -24px;
-    /* display: block; */
+    text-align: left !important;
+    margin-left: 15px;
     width: 100% !important;
 }
 
@@ -465,10 +500,11 @@ a.tab-item:hover{
 
 .edit-profile{
     background-color: #F3F4F6;
-    border:1px solid #bbb;
-    border-radius: 8;
+    border:0.5px solid #bbb;
+    border-radius: 8px;
     padding:10px;
-    width: 200px;
+    width: 100%;
+    font-weight: bold;
 }
 
 .edit-profile:hover{
@@ -485,12 +521,14 @@ a.tab-item:hover{
     border: 1px solid #E1E4E8; background-color: white; padding:8px;
     cursor: pointer;
     border-radius: 4px;
+    text-align: left;
 }
 
 .statusBtn:hover{
     color: #0366d6;
 }
-/* .header a.active{
-    border-bottom-style: 1px solid #F9826C ;
-    background-color: yellow;
-} */
+
+.firstProf{
+    font-size: 12px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
