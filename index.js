@@ -2,7 +2,7 @@ let month = '';
 const url = 'https://api.github.com/graphql';
 const headers = {
   "Content-Type": "application/json",
-  "Authorization": `Bearer ${token}`,
+  "Authorization": `Bearer ${token} `
 }
 
 function getMonth(monthValue){
@@ -112,8 +112,11 @@ document.getElementById('loadProfile').addEventListener("click", function (){
 
 async function getRepository(){
   const response = await fetch(url,{
-    method: 'POST',
+    method: "POST",
     headers: headers,
+    mode: "cors",
+    cache: "no-cache",
+    referrerPolicy: "no-referrer",
     body: JSON.stringify({query: 
       `{
         viewer {

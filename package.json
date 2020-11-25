@@ -1,0 +1,25 @@
+{
+    "name": "buycoins",
+    "type": "module",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node server.js"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://ekunomowunmi.github.io/BuyCoinProject/"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/ekunomowunmi/BuyCoinProject/issues"
+    },
+    "homepage": "https://github.com/ekunomowunmi/BuyCoinProject/issues",
+    "dependencies": {
+      "dotenv": "^8.2.0"
+    }
+  }
+  
