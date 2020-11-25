@@ -1,12 +1,8 @@
-// import {ApolloClient, InMemoryCache} from './node_modules/@apollo/client/core';
-// import {repoQuery} from './queries.js';
-
 let month = '';
 const url = 'https://api.github.com/graphql';
-// const queryRepo = repoQuery;
 const headers = {
   "Content-Type": "application/json",
-  "Authorization": "Bearer 9d456482e88313d9c2954045dec8c578347405b3",
+  "Authorization": "Bearer 302528a45ce3ccd5f524da8c49d49d339eb9b256",
 }
 
 function getMonth(monthValue){
@@ -54,6 +50,66 @@ function getMonth(monthValue){
   }
 }
 
+function getWeekDayHours(dayValue, currentDate, hour){
+if((currentDate.getDate() - dayValue) > 7){
+let plural;
+plural = Math.floor((currentDate.getDate() - dayValue)/7 > 1) ? true: false;
+let value;
+value = Math.ceil(currentDate.getDate() / dayValue);
+return `${value} week${plural?'s':''} ago`;
+} 
+else{
+  if(currentDate.getDate() == dayValue){
+    let plural;
+    plural = currentDate.getHours() - hour > 1 ? true:false;
+    return `${currentDate.getHours() - hour} hour${plural?'s':''} ago`;
+  }
+  else if ((currentDate.getDate() - dayValue) < 7) {
+    let plural;
+    plural = (currentDate.getDate() - dayValue) > 1 ? true: false;
+    return `${currentDate.getDate() - dayValue} day${plural?'s':''} ago`;
+    }
+}
+
+}
+
+let header = document.querySelector('.tab-header');
+window.addEventListener("scroll",function() {
+  var a = document.querySelector('.tab-header');
+  let scrollPos = window.scrollY;
+  if (scrollPos >=20){
+    header.className = "tab-header tab-header-scroll";
+  }
+  else {
+    header.className = "tab-header";
+  }
+});
+document.getElementById('responsiveMobile').addEventListener("click", function(){
+  var x = document.getElementById("header");
+  if (x.className === "header") {
+    x.className += " responsive";
+  } else {
+    x.className = "header";
+  }
+  // let x = document.getElementById("trans");
+  // if(x.className === "dropDownTransitionDefault"){
+  //   x.className = "dropdownTransisted"
+  // } else {
+  //   x.className = "dropDownTransitionDefault";
+  // }
+});
+
+document.getElementById('loadProfile').addEventListener("click", function (){
+  // $event.preventDefault();
+  let id = document.getElementById('nav2');
+  if(id.className === 'nav2hidden'){
+    id.className = 'nav2visible';
+  } else {
+    id.className = 'nav2hidden'
+  }
+}) ;
+
+
 async function getRepository(){
   const response = await fetch(url,{
     method: 'POST',
@@ -66,27 +122,35 @@ async function getRepository(){
           bio
           url
           avatarUrl
-          repositories(first: 20, orderBy: {field: CREATED_AT, direction: ASC}) {
+          repositories(first: 20, orderBy: {field: UPDATED_AT, direction: DESC}) {
             totalCount
             edges {
               node {
                 id
-                  name
+                name
                 description
                 createdAt
                 updatedAt
-              primaryLanguage{
-                name
-                color
+                primaryLanguage {
+                  name
+                  color
+                }
+                forkCount
+                issues(states: OPEN) {
+                  totalCount
+                }
               }
-              stargazerCount
-              forkCount
-              issues(states: OPEN){
-                totalCount
-              }
-              }
-              
             }
+          }
+          url
+          followers {
+            totalCount
+          }
+          following {
+            totalCount
+          }
+          starredRepositories {
+            totalCount
           }
         }
       }
@@ -99,25 +163,43 @@ async function getRepository(){
      let fullName = res.data.viewer.name;
      let username = res.data.viewer.login;
      let description = res.data.viewer.bio;
+     let noOfFollowers = res.data.viewer.followers.totalCount;
+     let noOfFollowing = res.data.viewer.following.totalCount;
+     let noOfStarredRepositories = res.data.viewer.starredRepositories.totalCount;
      let repositories = res.data.viewer.repositories.edges;
      document.querySelector('.avatar-user').src = image;
      document.querySelector('.fullname').textContent = fullName;
-     document.querySelector('.username').textContent = username;
+     document.querySelector('.no-of-followers').textContent = noOfFollowers;
+     document.querySelector('.no-of-following').textContent = noOfFollowing;
+     document.querySelector('.no-of-star-repo').textContent = noOfStarredRepositories
+
+     var usernames = document.querySelectorAll('.username');
+     usernames.forEach(eachUsername => {
+       eachUsername.textContent = username;
+     })
+    //  document.querySelector('.username').textContent = username;
      document.querySelector('.bio').textContent = description;
      repositories.reverse().map(repo => {
        let date = new Date(repo.node.updatedAt);
        let currentDate = new Date(Date.now());
        let currentDay = '';
-        let day = date.getDay();
-        let monthValue = date.getMonth();
+       let thisMonth = false;
+        let day = date.getDate();
+        let monthValue = date.getMonth() + 1;
+        let hour = date.getHours();
         let year = '';
-        if(date.getFullYear !== currentDate.getFullYear){
+        if(date.getFullYear() !== currentDate.getFullYear()){
           day += ', ';
           year = date.getFullYear();
         }
-        getMonth(monthValue);
+        if(monthValue !== (currentDate.getMonth() + 1)){
+          getMonth(monthValue);
+          currentDay = month+ day+year;
+        } else {
+          thisMonth = true;
+           currentDay = getWeekDayHours(day, currentDate, hour);
+        }
 
-        currentDay = month+ day+year;
 
        let element = `<div class="repoitem">
        <div class="row border-bottom">
@@ -134,7 +216,7 @@ async function getRepository(){
              <span>
              ${repo.node.primaryLanguage ? `<span class="repo-language-color" style="background-color: ${repo.node.primaryLanguage?.color};"></span>`:''}
                ${repo.node.primaryLanguage ? `<span>${repo.node.primaryLanguage.name} </span>`:''} 
-               <span class="font-12"> Updated <span>on ${currentDay}</span></span>
+               <span class="font-12"> Updated <span>${!thisMonth ? 'on ':''} ${currentDay}</span></span>
 
              </span>
            </div>
@@ -143,7 +225,7 @@ async function getRepository(){
          <div class="col-2 col-s-2 d-inline-block">
            <div class="text-right">
              <form method="POST">
-               <button type="submit" class="starrepo">Star</button>
+               <button id="starClick" class="starrepo">Star</button>
              </form>
            </div>
          </div>
@@ -154,14 +236,6 @@ async function getRepository(){
 
     })
   .catch(err => console.log(err))
-  // const response = await fetch('https://developer.github.com/v4/explorer/',params).then(res => {
-  //   console.log(res);
-  // });
-//   await client.query({queryRepo}).then(response => {
-// console.log(response);
-//   })
-  // return response;
 }
-
 
 getRepository();
