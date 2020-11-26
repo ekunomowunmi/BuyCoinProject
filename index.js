@@ -111,6 +111,8 @@ document.getElementById('loadProfile').addEventListener("click", function (){
 
 
 async function getRepository(){
+  let loader = `<div class="loader"></div>`;
+document.querySelector('.repolist').innerHTML = loader;
   const response = await fetch(url,{
     method: "POST",
     headers: headers,
@@ -185,6 +187,7 @@ async function getRepository(){
      })
     //  document.querySelector('.username').textContent = username;
      document.querySelector('.bio').textContent = description;
+     document.querySelector('.repolist').innerHTML = '';
      repositories.reverse().map(repo => {
        let date = new Date(repo.node.updatedAt);
        let currentDate = new Date(Date.now());
